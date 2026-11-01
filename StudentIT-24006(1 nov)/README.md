@@ -121,3 +121,36 @@ public class HelloServlet extends HttpServlet {
     }
 }
 ~~~
+
+### TASK:4:
+~~~
+package com.example;
+
+import org.apache.catalina.Context;
+import org.apache.catalina.LifecycleException;
+import org.apache.catalina.startup.Tomcat;
+
+import java.io.File;
+
+public class Main {
+
+    public static void main(String[] args) throws LifecycleException {
+        int port = 8080;
+
+        Tomcat tomcat = new Tomcat();
+        tomcat.setBaseDir(new File("tomcat-temp").getAbsolutePath());
+        tomcat.setPort(port);
+        tomcat.getConnector(); // initialise the default HTTP connector
+
+        Context ctx = tomcat.addContext("", new File(".").getAbsolutePath());
+        Tomcat.addServlet(ctx, "primeServlet", new PrimeServlet());
+        ctx.addServletMappingDecoded("/", "primeServlet");
+
+        tomcat.start();
+        System.out.println("Server started. Open in your browser: http://localhost:" + port + "/");
+        tomcat.getServer().await();
+    }
+}
+~~~
+<img width="655" height="438" alt="Screenshot 2026-11-01 115037" src="https://github.com/user-attachments/assets/9c586845-c705-4dda-bb50-d9d17b2075c6" />
+
