@@ -1,0 +1,10 @@
+CampusBoot - Reflection Answers
+
+1. What happens without @Retention(RetentionPolicy.RUNTIME)?
+Without it, the annotation gets the default policy, CLASS: the compiler keeps it in the .class file but the JVM does not load it into memory at runtime. Calls like getAnnotation(Component.class) would then return null for every class, field and method. The container would skip all classes, no values would be injected, the validator would find no @Range fields and the router would answer 404 for every path, so the whole framework would silently do nothing.
+
+2. Mapping to Spring Boot, and something real Spring does that CampusBoot does not.
+@Component maps to Spring's @Component (or @Service/@Repository), @Value maps to Spring's @Value("${app.name}"), @Range maps to Bean Validation constraints such as @Min/@Max (jakarta.validation), and @Route maps to @GetMapping/@RequestMapping. Real Spring also does dependency injection of beans into other beans (@Autowired, constructor injection), scans packages automatically, and manages bean scopes/lifecycles; CampusBoot only creates beans from a list of classes we pass in and does no wiring between them.
+
+3. Why is setAccessible(true) both powerful and risky?
+It switches off Java's access checks, so reflection can read and write private fields and call private methods. That is what lets a framework inject values into private fields without setters, which keeps classes clean. It is risky because it breaks encapsulation: code can change internal state or bypass invariants and validation, it can be abused to tamper with objects, and it makes code fragile because renaming a private member breaks it at runtime instead of compile time. Modern Java (modules, Java 9+) can also block it with an InaccessibleObjectException.
