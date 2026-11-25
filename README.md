@@ -35,10 +35,10 @@ All annotations use `@Retention(RetentionPolicy.RUNTIME)` so they can be read by
 
 ##  output
 
-```
+
 <img width="972" height="605" alt="Output" src="https://github.com/user-attachments/assets/2dc84d7c-5560-4ecf-b8b5-0c520011a5a3" />
 
-```
+
 
 ## Notes
 
