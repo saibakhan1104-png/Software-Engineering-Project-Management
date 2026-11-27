@@ -62,6 +62,10 @@ VIOLATION: semester - Value out of range (actual: 15)
 [Router] /unknown -> 404 Not Found: /unknown
 ```
 
+## Output
+<img width="972" height="605" alt="image" src="https://github.com/user-attachments/assets/677cdef9-bfb0-4df5-bc26-748974c97f85" />
+
+
 ## Notes
 
 - The starter code uses `@Route("/hello")`, which needs an element named `value`. To keep the starter code unmodified, `Route` declares both `path()` and `value()`, and `Router` accepts either.
